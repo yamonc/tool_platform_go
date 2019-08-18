@@ -45,6 +45,10 @@ BiliGo 是一个由多个 Go 开源库组装而成的快速开发 webapi 的系�
 
 `go version 1.12.8`
 
+创建数据库，并导入脚本 `mysql/init.sql`
+
+修改配置文件 `config/config.env` 中的数据库相关配置 
+
 环境变量已有可以不用指定
 
 ```

@@ -6,6 +6,7 @@ import (
 	"biligo/log"
 	"fmt"
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 var Conn *gorm.DB
@@ -26,7 +27,8 @@ func getMySQLConnectionUrl() string {
 // 初始化数据库连接
 func Init() {
 	log.Debug("初始化数据库连接..")
-	db, err := gorm.Open(DatabaseType, getMySQLConnectionUrl())
+	url := getMySQLConnectionUrl()
+	db, err := gorm.Open(DatabaseType, url)
 	if err != nil {
 		log.Panic("初始化数据库连接失败", err)
 	}
@@ -41,4 +43,10 @@ func Close() {
 	if err != nil {
 		log.Error("关闭数据库连接失败", err)
 	}
+}
+
+// 检查 sql 结果
+func CheckResult(result *gorm.DB) error {
+
+	return nil
 }

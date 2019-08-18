@@ -1,13 +1,14 @@
 package modules
 
 import (
-	"biligo/constant"
 	"biligo/log"
 	"biligo/modules/app"
+	"biligo/modules/auth"
 	"biligo/modules/system"
 	"biligo/util"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 // 全局路由设置文件
@@ -26,12 +27,14 @@ func RegisterRouter(r *gin.Engine) *gin.Engine {
 	log.Debug("注册首页")
 	r.GET("/", Index)
 
+	r.GET("/api/auth/login", auth.DoLogin)
+
 	log.Debug("注册 system 模块 路由")
-	sysGroup := r.Group("/api/system")
+	sysGroup := r.Group("/api/system", auth.AuthMiddleware)
 	system.RouteSys(sysGroup)
 
 	log.Debug("注册 app 模块 路由")
-	appGroup := r.Group("/api/app")
+	appGroup := r.Group("/api/app", auth.AuthMiddleware)
 	app.RegisterApp(appGroup)
 
 	return r
@@ -48,8 +51,6 @@ func Index(c *gin.Context) {
 func Page404(c *gin.Context) {
 	log.Warn(fmt.Sprintf("404 Page not found - %s %s ", c.Request.URL, c.Request.UserAgent()))
 
-	result := util.FailResultWithCodeAndMessage(constant.HttpPageNotFound,
-		"page not found", nil)
-
-	c.JSON(constant.HttpPageNotFound, result)
+	util.FailResultWithCodeAndMessage(http.StatusNotFound,
+		"page not found", nil).ToJSONWithHttpStatus(c)
 }

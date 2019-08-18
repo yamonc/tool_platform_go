@@ -7,4 +7,5 @@ import (
 
 func RouteSys(r *gin.RouterGroup) {
 	r.GET("/", api.Index)
+	r.GET("/current", api.Current)
 }

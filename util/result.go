@@ -3,6 +3,7 @@ package util
 import (
 	"biligo/constant"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 // HTTP 统一返回值
@@ -61,5 +62,10 @@ func FailResultWithCodeAndMessage(code int32, msg string, data interface{}) *Res
 
 // 返回 HTTP 响应
 func (result *Result) ToJSON(c *gin.Context) {
-	c.JSON(constant.HttpOk, result)
+	c.JSON(http.StatusOK, result)
+}
+
+// 返回 HTTP 响应及状态码
+func (result *Result) ToJSONWithHttpStatus(c *gin.Context) {
+	c.JSON(int(result.Code), result)
 }
