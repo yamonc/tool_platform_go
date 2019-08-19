@@ -6,7 +6,7 @@ import (
 )
 
 // 在这里注册你的 app 所有 api 路由
-func RegisterApp(r *gin.RouterGroup) {
+func RouteApp(r *gin.RouterGroup) {
 
 	r.GET("/test", api.Test)
 }

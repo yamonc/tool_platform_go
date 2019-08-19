@@ -24,9 +24,9 @@ DROP TABLE IF EXISTS `sys_user`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sys_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
-  `display_name` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
-  `password` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `username` varchar(100) DEFAULT NULL,
+  `display_name` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `user_status` int(11) DEFAULT '1',
   `dept_id` int(11) DEFAULT NULL,
   `login_at` timestamp NULL DEFAULT NULL,
@@ -55,7 +55,7 @@ DROP TABLE IF EXISTS `sys_user_token`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sys_user_token` (
-  `token` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `token` varchar(255) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `expired_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`token`)

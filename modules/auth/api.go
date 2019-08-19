@@ -13,8 +13,11 @@ import (
 
 // 登录
 func DoLogin(c *gin.Context) {
-	username := c.Query("username")
-	password := c.Query("password")
+	username := c.PostForm("username")
+	password := c.PostForm("password")
+
+	//username := c.Query("username")
+	//password := c.Query("password")
 
 	if user, e := validateLogin(c, username, password); e == nil {
 		token := UserToken{UserId: user.ID}
