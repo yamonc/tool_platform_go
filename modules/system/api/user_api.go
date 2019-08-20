@@ -7,14 +7,21 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// 获取当前登录用户
-// @router /api/system/current [GET]
-func Current(c *gin.Context) {
+// swagger:route GET /api/system/user/current
+//
+// 获取当前登录用户接口
+//     Responses:
+//       200: Result
+func UserCurrent(c *gin.Context) {
 	util.SuccessResult(auth.CurrentUser(c)).ToJSON(c)
 }
 
-// 获取用户列表
-// @router /api/system/user/userGET]
+// swagger:route GET /api/system/user/list
+//
+// 获取用户列表接口
+//
+//     Responses:
+//       200: Result
 func UserList(c *gin.Context) {
 	util.SuccessResult(service.GetUserList()).ToJSON(c)
 }

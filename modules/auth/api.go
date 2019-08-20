@@ -11,13 +11,17 @@ import (
 	"time"
 )
 
-// 登录
-func DoLogin(c *gin.Context) {
+// swagger:route POST /api/auth/login
+//
+// 登录接口
+//
+// 目前登录采用自定义 token 形式完成，登录后调用接口时需要在请求头里加入 Authorization: [token]
+//
+//     Responses:
+//       200: Result
+func Login(c *gin.Context) {
 	username := c.PostForm("username")
 	password := c.PostForm("password")
-
-	//username := c.Query("username")
-	//password := c.Query("password")
 
 	if user, e := validateLogin(c, username, password); e == nil {
 		token := UserToken{UserId: user.ID}

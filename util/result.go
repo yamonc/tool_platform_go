@@ -7,6 +7,7 @@ import (
 )
 
 // HTTP 统一返回值
+// swagger:response Result
 type Result struct {
 	Code      int32       `json:"code"`
 	Message   string      `json:"message"`

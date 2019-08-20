@@ -11,7 +11,7 @@ import (
 	"net/http"
 )
 
-// 全局路由设置文件
+/// 全局路由设置文件
 
 // 使用 gin 创建一个新的路由
 func NewRouter() *gin.Engine {
@@ -23,6 +23,9 @@ func NewRouter() *gin.Engine {
 func RegisterRouter(r *gin.Engine) *gin.Engine {
 	log.Debug("注册404页面")
 	r.NoRoute(Page404)
+
+	log.Debug("注册首页")
+	r.GET("/", Index)
 
 	log.Debug("注册 auth 模块路由")
 	auth.RouteAuth(r)
@@ -44,4 +47,14 @@ func Page404(c *gin.Context) {
 
 	util.FailResultWithCodeAndMessage(http.StatusNotFound,
 		"page not found", nil).ToJSONWithHttpStatus(c)
+}
+
+// swagger:route GET /
+//
+// 根路径接口
+//
+//     Responses:
+//       200: Result
+func Index(c *gin.Context) {
+	util.SuccessResult("Hello, BiliGo!").ToJSON(c)
 }

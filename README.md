@@ -29,7 +29,7 @@ BiliGo 是一个由多个 Go 开源库组装而成的快速开发 webapi 的系�
 └─modules               # 接口代码
     ├─app               # **你的代码应该在这里**
     │  ├─api            #   uri 入口
-    │  ├─model          #   数据库 ORM 对象文件
+    │  ├─model          #   数据库 ORM 对象 struct
     │  ├─service        #   service 代码
     │  └─router.go      #   模块路由设置
     ├─system            # BiliGo 内置系统模块（可能会写些东西）
@@ -72,7 +72,7 @@ http://localhost:8888/
     "code": 0,
     "message": "处理成功",
     "success": true,
-    "data": "Hello BiliGo",
+    "data": "Hello, BiliGo!",
     "timestamp": 1566017186754
 }
 ```

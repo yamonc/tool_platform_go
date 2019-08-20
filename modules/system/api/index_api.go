@@ -5,8 +5,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// 系统根路径
-// @router /api/system/ [GET]
+// swagger:route GET /api/system/
+//
+// system 模块根接口
+//
+//     Responses:
+//       200: Result
 func Index(c *gin.Context) {
 	util.SuccessResult("Hello Model System").ToJSON(c)
 }
