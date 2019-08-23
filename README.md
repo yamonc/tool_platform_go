@@ -7,7 +7,7 @@ BiliGo 是一个由多个 Go 开源库组装而成的快速开发 webapi 的系�
 
 1. 强大的框架太复杂，没必要
 2. 简单的框架太简单，不够用
-3. BiliGo 的目标是上手即用，像呼吸
+3. BiliGo 的目标是上手即用，像呼吸一样自如
 
 ## 使用到的库
 
@@ -15,7 +15,7 @@ BiliGo 是一个由多个 Go 开源库组装而成的快速开发 webapi 的系�
 - [logrus](https://github.com/sirupsen/logrus) 日志框架
 - [goprofile](https://github.com/ltyyz/goprofile) 多环境配置文件管理工具
 - [gorm](https://github.com/jinzhu/gorm) 数据库 orm 框架
-- [uuid](github.com/gofrs/uuid) uuid 生成库
+- [uuid](https://github.com/gofrs/uuid) uuid 生成库
 
 ## 文件夹介绍及主要文件
 
@@ -50,12 +50,16 @@ BiliGo 是一个由多个 Go 开源库组装而成的快速开发 webapi 的系�
 
 修改配置文件 `config/config.env` 中的数据库相关配置 
 
-(环境变量已有可以不用指定)
+设置环境变量（已设置跳过）
 
 ```
-export GOPROXY=http://mirrors.aliyun.com/goproxy/
-export GO111MODULE=on
+GOPROXY=http://mirrors.aliyun.com/goproxy/
+GO111MODULE=on
+```
 
+然后运行
+
+```
 go run .
 ```
 
