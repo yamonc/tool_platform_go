@@ -9,4 +9,9 @@ const (
 	ResultCodeFail    = 1
 
 	HttpHeaderAuthorized = "Authorization"
+
+	// Cookie 模式登录
+	CookieLoginEnabled = "bili.server.cookie-login"
+	// Cookie 名
+	CookieLoginName = "bili.server.cookie-name"
 )
