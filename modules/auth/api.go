@@ -1,6 +1,8 @@
 package auth
 
 import (
+	"biligo/config"
+	"biligo/constant"
 	"biligo/mysql"
 	"biligo/util"
 	"errors"
@@ -29,8 +31,19 @@ func Login(c *gin.Context) {
 		token.ExpiredAt = util.AddTime(time.Now(), "168h")
 
 		mysql.Conn.Create(&token)
+		cookieLogin(c, &token)
 
 		util.SuccessResult(token).ToJSON(c)
+	}
+}
+
+// 使用 Cookie 模式登录
+func cookieLogin(c *gin.Context, token *UserToken) {
+	cookieLoginEnabled := config.GetConfig(constant.CookieLoginEnabled)
+	if cookieLoginEnabled == "true" {
+		util.SetCookie(c, config.GetConfig(constant.CookieLoginName),
+			token.Token,
+			-1)
 	}
 }
 

@@ -44,16 +44,16 @@ BiliGo 是一个由多个 Go 开源库组装而成的快速开发 webapi 的系�
 
 ## 快速上手
 
-`go version 1.12.9`
+`go version 1.13`
 
 创建数据库，并导入脚本 `mysql/init.sql`
 
 修改配置文件 `config/config.env` 中的数据库相关配置 
 
-设置环境变量（已设置跳过）
+设置环境变量（1.13 版本已支持多镜像）
 
 ```
-GOPROXY=http://mirrors.aliyun.com/goproxy/
+GOPROXY=https://goproxy.cn,direct
 GO111MODULE=on
 ```
 
