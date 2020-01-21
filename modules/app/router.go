@@ -8,7 +8,7 @@ import (
 /// app 模块路由设置文件
 
 // 在这里注册你的 app 所有 api 路由
-func RouteApp(r *gin.RouterGroup) {
+func Route(r *gin.RouterGroup) {
 
 	r.GET("/test", api.Test)
 }

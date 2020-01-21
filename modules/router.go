@@ -28,15 +28,15 @@ func RegisterRouter(r *gin.Engine) *gin.Engine {
 	r.GET("/", Index)
 
 	log.Debug("注册 auth 模块路由")
-	auth.RouteAuth(r)
+	auth.Route(r)
 
 	log.Debug("注册 system 模块路由")
 	sysGroup := r.Group("/api/system", auth.AuthMiddleware)
-	system.RouteSystem(sysGroup)
+	system.Route(sysGroup)
 
 	log.Debug("注册 app 模块路由")
 	appGroup := r.Group("/api/app", auth.AuthMiddleware)
-	app.RouteApp(appGroup)
+	app.Route(appGroup)
 
 	return r
 }
