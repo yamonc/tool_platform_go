@@ -7,7 +7,7 @@ import (
 
 /// system 模块路由设置文件
 
-func RouteSystem(r *gin.RouterGroup) {
+func Route(r *gin.RouterGroup) {
 	r.GET("/", api.Index)
 
 	r.GET("/user/current", api.UserCurrent)
