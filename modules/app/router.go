@@ -11,4 +11,5 @@ import (
 func RouteApp(r *gin.RouterGroup) {
 
 	r.GET("/test", api.Test)
+	r.GET("/test_QueryForMap", api.TestQueryForMap)
 }
