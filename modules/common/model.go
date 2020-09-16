@@ -1,4 +1,4 @@
-package model
+package common
 
 import (
 	"biligo/constant"
@@ -11,7 +11,7 @@ import (
 // 使用方式:
 //
 // type User struct {
-// 		model.Model
+// 		common.Model
 // }
 type Base struct {
 	ID        uint      `gorm:"primary_key" json:"id"`

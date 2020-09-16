@@ -1,4 +1,4 @@
-package page
+package common
 
 import (
 	"biligo/util"
@@ -27,14 +27,14 @@ type Pagination struct {
 	List      []interface{} `json:"list"`
 }
 
-// Of - 初始化一个分页对象
-func Of(pageNo int, pageSize int) *Pagination {
+// NewPage - 初始化一个分页对象
+func NewPage(pageNo int, pageSize int) *Pagination {
 	pagination := Pagination{PageNo: pageNo, PageSize: pageSize}
 	return &pagination
 }
 
-// FromGin - 从 gin.Context 初始化一个分页对象
-func FromGin(c *gin.Context) *Pagination {
+// NewPageFromGin - 从 gin.Context 初始化一个分页对象
+func NewPageFromGin(c *gin.Context) *Pagination {
 	pageNo, _ := c.Params.Get(pageNoName)
 	pageSize, _ := c.Params.Get(pageSizeName)
 	if !util.IsInt(pageNo) {
@@ -43,7 +43,7 @@ func FromGin(c *gin.Context) *Pagination {
 	if !util.IsInt(pageSize) {
 		pageSize = pageSizeDefault
 	}
-	return Of(util.ToInt(pageNo), util.ToInt(pageSize))
+	return NewPage(util.ToInt(pageNo), util.ToInt(pageSize))
 }
 
 // SetTotalSize - 设置总数，并计算出总页数

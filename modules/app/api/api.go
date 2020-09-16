@@ -4,6 +4,7 @@ import (
 	"biligo/modules/app/service"
 	"biligo/mysql"
 	"biligo/util"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,7 +14,7 @@ import (
 //
 //     Responses:
 //       200: Result
-func Test(c *gin.Context) {
+func TestIndex(c *gin.Context) {
 	util.SuccessResult(service.TestService()).ToJSON(c)
 }
 

@@ -4,7 +4,6 @@ import (
 	"biligo/log"
 	"biligo/modules/app"
 	"biligo/modules/auth"
-	"biligo/modules/seed"
 	"biligo/modules/system"
 	"biligo/util"
 	"fmt"
@@ -39,10 +38,6 @@ func RegisterRouter(r *gin.Engine) *gin.Engine {
 	log.Debug("注册 app 模块路由")
 	appGroup := r.Group("/api/app", auth.AuthMiddleware)
 	app.Route(appGroup)
-
-	log.Debug("注册 seed 模块路由")
-	seedGroup := r.Group("/api/seed", auth.AuthMiddleware)
-	seed.Route(seedGroup)
 
 	return r
 }
