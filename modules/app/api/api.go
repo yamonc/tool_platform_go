@@ -16,3 +16,7 @@ import (
 func TestIndex(c *gin.Context) {
 	util.SuccessResult(service.TestService()).ToJSON(c)
 }
+
+func TestQueryForMap(c *gin.Context) {
+	util.SuccessResult(service.TestQueryForMap()).ToJSON(c)
+}

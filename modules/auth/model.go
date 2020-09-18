@@ -1,8 +1,9 @@
 package auth
 
 import (
-	"github.com/jinzhu/gorm"
 	"time"
+
+	"gorm.io/gorm"
 )
 
 type User struct {

@@ -5,8 +5,10 @@ import (
 	"biligo/constant"
 	"biligo/log"
 	"fmt"
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
+
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
+	"gorm.io/gorm/schema"
 )
 
 var Conn *gorm.DB
@@ -28,21 +30,33 @@ func getMySQLConnectionUrl() string {
 func Init() {
 	log.Debug("初始化数据库连接..")
 	url := getMySQLConnectionUrl()
-	db, err := gorm.Open(DatabaseType, url)
+	db, err := gorm.Open(mysql.New(mysql.Config{
+		DSN:                       url,
+		DefaultStringSize:         256,
+		DisableDatetimePrecision:  true,
+		DontSupportRenameIndex:    true,
+		DontSupportRenameColumn:   true,
+		SkipInitializeWithVersion: false,
+	}), &gorm.Config{
+		NamingStrategy: schema.NamingStrategy{
+			SingularTable: true,
+		},
+	})
 	if err != nil {
 		log.Panic("初始化数据库连接失败", err)
 	}
-	db.SingularTable(true)
 
 	Conn = db
 }
 
 // 关闭数据库连接池
 func Close() {
-	err := Conn.Close()
-	if err != nil {
-		log.Error("关闭数据库连接失败", err)
-	}
+	// 最新版本 gorm v2.0 已经没有 Close() 函数了 Sad :(
+
+	// err := Conn.Close()
+	// if err != nil {
+	// 	log.Error("关闭数据库连接失败", err)
+	// }
 }
 
 // 检查 sql 结果

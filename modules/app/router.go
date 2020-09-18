@@ -13,6 +13,7 @@ import (
 func Route(r *gin.RouterGroup) {
 
 	r.GET("/test", api.TestIndex)
+	r.GET("/test/map", api.TestQueryForMap)
 
 	r.GET("/note/", note.NoteList)
 	r.GET("/label/", note.LabelList)

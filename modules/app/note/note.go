@@ -6,6 +6,7 @@ import (
 	"biligo/util"
 
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
 
 /////////////////////////////////////////////////////////////////
@@ -42,7 +43,7 @@ func queryLabelList() *[]Label {
 // MODEL
 
 type Note struct {
-	common.Base
+	gorm.Model
 	NoteTitle   string `json:"noteTitle"`
 	NoteType    string `json:"noteType"`
 	NoteContent string `json:"noteContent"`
