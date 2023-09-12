@@ -3,6 +3,7 @@ package app
 import (
 	"biligo/modules/app/api"
 	"biligo/modules/app/note"
+	"biligo/modules/app/password"
 
 	"github.com/gin-gonic/gin"
 )
@@ -17,4 +18,10 @@ func Route(r *gin.RouterGroup) {
 
 	r.GET("/note/", note.NoteList)
 	r.GET("/label/", note.LabelList)
+
+	r.GET("/password/list", password.PasswordList)
+	r.GET("/password/get/:id", password.GetPasswordById)
+	r.POST("/password/save", password.SavePassword)
+	r.PUT("/password/:id", password.UpdatePassword)
+	r.DELETE("/password/:id", password.DeletePassword)
 }

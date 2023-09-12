@@ -4,35 +4,33 @@ import (
 	"biligo/config"
 	"biligo/constant"
 	"biligo/mysql"
-	"biligo/util"
 	"github.com/gin-gonic/gin"
-	"net/http"
-	"strings"
 )
 
 // 登录拦截
 // BiliGo 使用请求头中加入 Authorized 参数来获取 token 值
-// TODO 使用 REDIS 优化性能
+// TODO 先放行，后期加认证 使用 REDIS 优化性能
 func AuthMiddleware(c *gin.Context) {
-	auth := getToken(c)
-	if strings.TrimSpace(auth) == "" {
-		util.FailResultWithCodeAndMessage(http.StatusUnauthorized,
-			"请先登录", nil).ToJSONWithHttpStatus(c)
-		c.Abort()
-
-	} else {
-		token := UserToken{}
-		mysql.Conn.Where("token=? and expired_at > current_timestamp", auth).
-			First(&token)
-		if token.Token != "" {
-			c.Next()
-
-		} else {
-			util.FailResultWithCodeAndMessage(http.StatusUnauthorized,
-				"请先登录", nil).ToJSONWithHttpStatus(c)
-			c.Abort()
-		}
-	}
+	c.Next()
+	//auth := getToken(c)
+	//if strings.TrimSpace(auth) == "" {
+	//	util.FailResultWithCodeAndMessage(http.StatusUnauthorized,
+	//		"请先登录", nil).ToJSONWithHttpStatus(c)
+	//	c.Abort()
+	//
+	//} else {
+	//	token := UserToken{}
+	//	mysql.Conn.Where("token=? and expired_at > current_timestamp", auth).
+	//		First(&token)
+	//	if token.Token != "" {
+	//		c.Next()
+	//
+	//	} else {
+	//		util.FailResultWithCodeAndMessage(http.StatusUnauthorized,
+	//			"请先登录", nil).ToJSONWithHttpStatus(c)
+	//		c.Abort()
+	//	}
+	//}
 }
 
 // 获取 Token

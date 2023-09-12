@@ -37,6 +37,7 @@ func RegisterRouter(r *gin.Engine) *gin.Engine {
 
 	log.Debug("注册 app 模块路由")
 	appGroup := r.Group("/api/app", auth.AuthMiddleware)
+
 	app.Route(appGroup)
 
 	return r
@@ -54,8 +55,8 @@ func Page404(c *gin.Context) {
 //
 // 根路径接口
 //
-//     Responses:
-//       200: Result
+//	Responses:
+//	  200: Result
 func Index(c *gin.Context) {
 	util.SuccessResult("Hello, BiliGo!").ToJSON(c)
 }

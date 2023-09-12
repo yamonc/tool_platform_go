@@ -3,6 +3,7 @@ package api
 import (
 	"biligo/modules/app/service"
 	"biligo/util"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
 )
@@ -11,9 +12,10 @@ import (
 //
 // app 模块 test 接口
 //
-//     Responses:
-//       200: Result
+//	Responses:
+//	  200: Result
 func TestIndex(c *gin.Context) {
+	fmt.Println("11111")
 	util.SuccessResult(service.TestService()).ToJSON(c)
 }
 
