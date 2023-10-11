@@ -2,9 +2,10 @@ package app
 
 import (
 	"biligo/modules/app/api"
+	"biligo/modules/app/car"
+	"biligo/modules/app/maintain"
 	"biligo/modules/app/note"
 	"biligo/modules/app/password"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -24,4 +25,17 @@ func Route(r *gin.RouterGroup) {
 	r.POST("/password/save", password.SavePassword)
 	r.PUT("/password/:id", password.UpdatePassword)
 	r.DELETE("/password/:id", password.DeletePassword)
+
+	r.POST("/car/save", car.SaveCarInfo)
+	r.GET("/car/list", car.CarInfoList)
+	r.GET("/car/get/:id", car.GetCarInfoById)
+	r.PUT("/car/:id", car.UpdateCarInfoById)
+	r.DELETE("/car/:id", car.DeleteCarInfoById)
+	r.GET("/car/list/names", car.GetAllCarIdAndName)
+
+	r.POST("/maintain/save", maintain.SaveCarMaintainInfo)
+	r.GET("/maintain/list", maintain.CarMaintainInfoList)
+	r.GET("/maintain/get/:id", maintain.GetMaintainInfoById)
+	r.DELETE("/maintain/:id", maintain.DeleteMaintainInfoById)
+
 }
