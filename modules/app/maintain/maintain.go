@@ -1,7 +1,7 @@
 package maintain
 
 import (
-	"biligo/modules/app/car"
+	"biligo/modules/app/model"
 	"biligo/modules/common"
 	"biligo/mysql"
 	"fmt"
@@ -12,7 +12,7 @@ import (
 )
 
 func SaveCarMaintainInfo(c *gin.Context) {
-	car := CarMaintain{}
+	car := model.CarMaintain{}
 	err := c.BindJSON(&car)
 	car.Uuid = util.UUID()
 	car.CreateTime = time.Now().Format("2006-01-02 15:04:05")
@@ -32,7 +32,7 @@ func CarMaintainInfoList(c *gin.Context) {
 func GetMaintainInfoById(c *gin.Context) {
 	id := c.Param("id")
 	carMaintain := checkCarMaintainInfoById(id)
-	car := car.Car{}
+	car := model.Car{}
 	// 查carInfo表
 	mysql.Conn.Where("uuid = ?", carMaintain.CarId).Take(&car)
 	if carMaintain.Uuid == "" {
@@ -54,19 +54,19 @@ func DeleteMaintainInfoById(c *gin.Context) {
 	}
 }
 
-func checkCarMaintainInfoById(id string) *CarMaintain {
-	carMaintainInfo := &CarMaintain{}
+func checkCarMaintainInfoById(id string) *model.CarMaintain {
+	carMaintainInfo := &model.CarMaintain{}
 	mysql.Conn.Where("uuid = ?", id).Take(carMaintainInfo)
 	return carMaintainInfo
 }
 
 // NoteList - 分页查询 note
-func queryNoteList(pagination *common.Pagination) *[]CarMaintain {
-	carMaintains := []CarMaintain{}
+func queryNoteList(pagination *common.Pagination) *[]model.CarMaintain {
+	carMaintains := []model.CarMaintain{}
 	mysql.Conn.Order("create_time desc").Find(&carMaintains)
 	for i := range carMaintains {
 		// 根据uuid获取car信息
-		car := car.Car{}
+		car := model.Car{}
 		mysql.Conn.Where("uuid = ?", carMaintains[i].CarId).Take(&car)
 		carMaintains[i].CarName = car.Name
 		parsedTime, err := time.Parse(time.RFC3339, carMaintains[i].CreateTime)
@@ -79,14 +79,6 @@ func queryNoteList(pagination *common.Pagination) *[]CarMaintain {
 	}
 	return &carMaintains
 }
+func TestCar(c *gin.Context) {
 
-type CarMaintain struct {
-	Uuid       string `json:"uuid"`
-	CarId      string `json:"carId"`
-	CarName    string `json:"carName"`
-	LastKm     string `json:"lastKm"`
-	LastTime   string `json:"lastTime"`
-	NowKm      string `json:"nowKm"`
-	Remark     string `json:"remark"`
-	CreateTime string `json:"createTime"`
 }

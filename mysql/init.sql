@@ -82,3 +82,32 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2019-08-18 22:13:33
+# 初始化car_record表
+insert into `car_record` values('1',null, '更换发动机机油 *1', '5000', '6');
+insert into `car_record` values('2',null, '更换发动机机油滤清器 *1', '5000', '12');
+insert into `car_record` values('3',null, '更换空气滤清器滤芯', '20000', null);
+insert into `car_record` values('4',null, '检查气门间隙*2', '120000', null);
+insert into `car_record` values('5', null,'更换火花塞', '100000', null);
+insert into `car_record` values('6',null, '检查传动皮带', '400000', null);
+insert into `car_record` values('7',null, '更换发动机冷却液', '200000', null);
+insert into `car_record` values('8',null, '添加纯正喷油嘴清洗剂', '5000', '6');
+insert into `car_record` values('9',null, '更换变速器油', '400000', '12');
+insert into `car_record` values('10',null, '更换粉尘滤清器', '20000', '12');
+insert into `car_record` values('11',null, '检查前后制动器', '10000', '12');
+insert into `car_record` values('12',null, '更换制动液', null, '36');
+insert into `car_record` values('13',null, '更换油箱中的燃油滤清器', '180000', '36');
+insert into `car_record` values('14',null, '轮胎换位（每个月至少检查一次轮胎充气和状况）', '10000', null);
+insert into `car_record` values('15',null, '传动轴防尘罩横拉杆接头、转向齿轮箱和防尘套悬架部件', '10000', '12');
+insert into `car_record` values('16',null, '制动软管和管路（包括 ABS/VSA）排气系统燃油管路和连接', '20000', '12');
+
+create table car
+(
+    uuid        varchar(255) null,
+    name        varchar(255) null comment '车辆名称',
+    remark      text         null comment '备注',
+    daily_km    varchar(255) null comment '每日行驶距离',
+    is_alarm    tinyint(1)   null comment '是否开启提醒',
+    create_time timestamp    null comment '创建时间'
+);
+
+

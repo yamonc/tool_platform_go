@@ -4,10 +4,11 @@ import (
 	"biligo/config"
 	"biligo/constant"
 	"biligo/log"
+	"biligo/modules/app/model"
 	"fmt"
-
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 	"gorm.io/gorm/schema"
 )
 
@@ -38,6 +39,7 @@ func Init() {
 		DontSupportRenameColumn:   true,
 		SkipInitializeWithVersion: false,
 	}), &gorm.Config{
+		Logger: logger.Default.LogMode(logger.Info),
 		NamingStrategy: schema.NamingStrategy{
 			SingularTable: true,
 		},
@@ -45,7 +47,12 @@ func Init() {
 	if err != nil {
 		log.Panic("初始化数据库连接失败", err)
 	}
-
+	// 开启数据库自映射，直接通过结构体映射成为数据库表对象。注：不支持结构体删除字段同步表结构
+	errMigrate := db.AutoMigrate(&model.Car{})
+	logger.Default.LogMode(logger.Info)
+	if errMigrate != nil {
+		return
+	}
 	Conn = db
 }
 

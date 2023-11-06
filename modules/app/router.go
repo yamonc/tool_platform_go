@@ -38,4 +38,6 @@ func Route(r *gin.RouterGroup) {
 	r.GET("/maintain/get/:id", maintain.GetMaintainInfoById)
 	r.DELETE("/maintain/:id", maintain.DeleteMaintainInfoById)
 
+	r.GET("/car/test", car.TestCar)
+
 }
